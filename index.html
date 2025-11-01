@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single-Player Yatzy</title>
+    
+    <!-- Import Google Fonts from README -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container" id="gameContainer">
+        <div class="game-header">
+            <h2>Yatzy Game</h2>
+            <button id="instructionsButton">(?)</button>
+        </div>
+
+        <!-- Scorecard at the top -->
+        <div class="scorecard">
+            <!-- Upper Section -->
+            <h4 class="section-title">Upper Section</h4>
+            <div class="score-section" id="ones-section">
+                <label>Ones</label>
+                <span id="onesScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="twos-section">
+                <label>Twos</label>
+                <span id="twosScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="threes-section">
+                <label>Threes</label>
+                <span id="threesScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="fours-section">
+                <label>Fours</label>
+                <span id="foursScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="fives-section">
+                <label>Fives</label>
+                <span id="fivesScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="sixes-section">
+                <label>Sixes</label>
+                <span id="sixesScore" class="score-value">0</span>
+            </div>
+
+            <!-- Lower Section -->
+            <h4 class="section-title">Lower Section</h4>
+            <div class="score-section" id="threeOfAKind-section">
+                <label>Three of a Kind</label>
+                <span id="threeOfAKindScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="fourOfAKind-section">
+                <label>Four of a Kind</label>
+                <span id="fourOfAKindScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="fullHouse-section">
+                <label>Full House</label>
+                <span id="fullHouseScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="smallStraight-section">
+                <label>Small Straight</label>
+                <span id="smallStraightScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="largeStraight-section">
+                <label>Large Straight</label>
+                <span id="largeStraightScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="chance-section">
+                <label>Chance</label>
+                <span id="chanceScore" class="score-value">0</span>
+            </div>
+            <div class="score-section" id="yatzy-section">
+                <label>Yatzy</label>
+                <span id="yatzyScore" class="score-value">0</span>
+            </div>
+            
+            <!-- Total Score -->
+            <div id="totalScore">Total: 0</div>
+        </div>
+
+        <!-- Dice and Controls at the bottom -->
+        <div class="dice-container">
+            <div class="dice" id="dice1">
+                <span class="pip pip-a"></span><span class="pip pip-c"></span>
+                <span class="pip pip-e"></span><span class="pip pip-b"></span><span class="pip pip-f"></span>
+                <span class="pip pip-d"></span><span class="pip pip-g"></span>
+            </div>
+            <div class="dice" id="dice2">
+                <span class="pip pip-a"></span><span class="pip pip-c"></span>
+                <span class="pip pip-e"></span><span class="pip pip-b"></span><span class="pip pip-f"></span>
+                <span class="pip pip-d"></span><span class="pip pip-g"></span>
+            </div>
+            <div class="dice" id="dice3">
+                <span class="pip pip-a"></span><span class="pip pip-c"></span>
+                <span class="pip pip-e"></span><span class="pip pip-b"></span><span class="pip pip-f"></span>
+                <span class="pip pip-d"></span><span class="pip pip-g"></span>
+            </div>
+            <div class="dice" id="dice4">
+                <span class="pip pip-a"></span><span class="pip pip-c"></span>
+                <span class="pip pip-e"></span><span class="pip pip-b"></span><span class="pip pip-f"></span>
+                <span class="pip pip-d"></span><span class="pip pip-g"></span>
+            </div>
+            <div class="dice" id="dice5">
+                <span class="pip pip-a"></span><span class="pip pip-c"></span>
+                <span class="pip pip-e"></span><span class="pip pip-b"></span><span class="pip pip-f"></span>
+                <span class="pip pip-d"></span><span class="pip pip-g"></span>
+            </div>
+        </div>
+
+        <h3>Roll: <span id="rollCount">0</span></h3>
+
+        <div class="button-container">
+            <button id="rollButton">Roll Dice</button>
+            <button id="endGameButton">End Game</button>
+            <button id="newGameButton" class="hidden">New Game</button>
+        </div>
+
+    </div>
+
+    <!-- Game Instructions (hidden by default) -->
+    <div id="instructionsModal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <button id="closeModalButton">&times;</button>
+            <h3>How to Play Yatzy</h3>
+            <p>The goal is to get the highest score by rolling five dice to make specific combinations.</p>
+            
+            <h4>Gameplay:</h4>
+            <ul>
+                <li>Click <b>Roll Dice</b> to roll. You get 3 rolls per turn.</li>
+                <li>After your first roll, click any dice to keep them. They will glow orange.</li>
+                <li>Click <b>Roll Dice</b> again to re-roll only the dice you didn't keep.</li>
+                <li>After 3 rolls (or earlier), you must click a score category to lock in your score.</li>
+                <li>You can only score in each category once per game.</li>
+            </ul>
+
+            <h4>Scoring Rules:</h4>
+            <ul>
+                <li><b>Ones to Sixes</b>: <b>Points: Sum of only that number</b> (e.g., 5-5-1-5-2 scores 15 for "Fives").</li>
+                <li><b>Three of a Kind</b>: Three same dice.   <b>Points: Sum of all dice</b></li>
+                <li><b>Four of a Kind</b>: Four same dice.   <b>Points: Sum of all dice</b>.</li>
+                <li><b>Full House</b>:Three of one kind and two of another. <b>25 points</b>.</li>
+                <li><b>Small Straight</b>: Four sequential dice(e.g., 1-2-3-4) <b>30 points</b></li>
+                <li><b>Large Straight</b>: Five sequential dice(e.g., 1-2-3-4-5) <b>40 points</b></li>
+                <li><b>Chance</b>: Any combination of the dice. <b>Points: Sum of all five dice.</b></li>
+                <li><b>Yatzy</b>: All five dice showing the same number. <b>50 points.</b></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
