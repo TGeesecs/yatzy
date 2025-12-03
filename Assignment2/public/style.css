@@ -1,0 +1,348 @@
+/* --- Global Styles & Fonts --- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #264653;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top */
+    min-height: 100vh;
+    margin: 0;
+    padding: 1em 0; /* Add padding for small screens */
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #264653;
+    margin: 0;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #2A9D8F;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* --- Game Layout --- */
+.game-container {
+    background-color: #F1FAEE; /* Accent - Cream */
+    padding: 20px;
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+/* --- Header --- */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#instructionsButton {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #2A9D8F;
+    background: #fff;
+    color: #2A9D8F;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+    #instructionsButton:hover {
+        background: #2A9D8F;
+        color: #fff;
+    }
+
+/* --- Scorecard (2-column layout) --- */
+.scorecard {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 0;
+}
+
+.section-title,
+#totalScore {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin: 8px 0 0 0;
+    font-family: 'Poppins', sans-serif;
+    color: #2A9D8F;
+}
+
+.score-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+    .score-section label {
+        font-weight: 600;
+    }
+
+    .score-section.selectable:hover {
+        background-color: #e6f7ff;
+        cursor: pointer;
+    }
+
+    .score-section.locked {
+        background-color: #f0f0f0;
+        color: #888;
+        cursor: not-allowed;
+    }
+
+.score-value {
+    font-weight: 600;
+}
+
+#totalScore {
+    margin-top: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    text-align: center;
+    color: #F4A261; /* Primary - Orange */
+}
+
+/* --- Dice Design (Smaller) --- */
+.dice-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+    margin: 15px 0;
+}
+
+.dice {
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    user-select: none;
+    /* This is for jQuery's .animate() to move the element */
+    position: relative;
+    display: grid;
+    grid-template-areas:
+        "a . c"
+        "e b f"
+        "d . g";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 6px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+    /* Kept Dice Effect*/
+    .dice.kept {
+        box-shadow: 0 0 10px 3px #F4A261; /* Primary - Orange glow */
+        transform: scale(0.95);
+    }
+
+
+/* --- Pip (Dot) Styles --- */
+.pip {
+    background-color: #000000;
+    border-radius: 50%;
+    width: 10px; /* Smaller pips */
+    height: 10px;
+    align-self: center;
+    justify-self: center;
+    display: none; /* Hide all pips by default */
+}
+
+/* Show pips based on parent class */
+.face-1 .pip-b {
+    display: block;
+}
+
+.face-2 .pip-a, .face-2 .pip-g {
+    display: block;
+}
+
+.face-3 .pip-a, .face-3 .pip-b, .face-3 .pip-g {
+    display: block;
+}
+
+.face-4 .pip-a, .face-4 .pip-c, .face-4 .pip-d, .face-4 .pip-g {
+    display: block;
+}
+
+.face-5 .pip-a, .face-5 .pip-c, .face-5 .pip-b, .face-5 .pip-d, .face-5 .pip-g {
+    display: block;
+}
+
+.face-6 .pip-a, .face-6 .pip-c, .face-6 .pip-e, .face-6 .pip-f, .face-6 .pip-d, .face-6 .pip-g {
+    display: block;
+}
+
+/* Pip grid areas */
+.pip-a {
+    grid-area: a;
+}
+
+.pip-b {
+    grid-area: b;
+}
+
+.pip-c {
+    grid-area: c;
+}
+
+.pip-d {
+    grid-area: d;
+}
+
+.pip-e {
+    grid-area: e;
+}
+
+.pip-f {
+    grid-area: f;
+}
+
+.pip-g {
+    grid-area: g;
+}
+
+/* --- Button Controls --- */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+    .button-container button {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        font-size: 1em;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        padding: 12px;
+        transition: all 0.2s;
+        width: 100%; /* Make buttons share space */
+    }
+
+#rollButton {
+    background: #2A9D8F;
+    color: #FFFFFF;
+    flex-grow: 2;
+}
+
+    #rollButton:hover {
+        background: #238073;
+    }
+
+    #rollButton:disabled {
+        background: #999;
+        cursor: not-allowed;
+    }
+
+#endGameButton {
+    background: #E76F51;
+    color: #fff;
+}
+
+    #endGameButton:hover {
+        background: #d15a3a;
+    }
+
+#newGameButton {
+    background: #F4A261;
+    color: #fff;
+}
+
+    #newGameButton:hover {
+        background: #e08c4a;
+    }
+
+/* --- Modal Styles --- */
+.hidden {
+    display: none !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2em;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+    .modal-close:hover {
+        color: #333;
+    }
+
+.modal-content h2, .modal-content h3 {
+    font-family: 'Poppins', sans-serif;
+    color: #2A9D8F;
+    margin-top: 0;
+}
+
+.modal-content h3 {
+    font-size: 1.1em;
+    margin-top: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.modal-list {
+    padding-left: 20px;
+    line-height: 1.6;
+}
